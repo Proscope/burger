@@ -1,34 +1,35 @@
-<div class="container">
-	<div class="row">
-		<div class="col-xs-12 text-center" id="top-bar">
-			<img src="/assets/img/burger.png" alt="burger" />
-			<h1> Eat-Da-Burger! </h1>
-		</div>
-		<div class="col-xs-6 text-center" class="task">
-			<div class="row">
-			  {{#each burger_data}}
-			  	{{#unless this.devoured}}
-				<div class="col-xs-9 text-center">
-					<pre>{{this.id}}. {{this.burger_name}}
-					</pre>
-				  		<!-- {{this.Date}} -->
-				</div>
-				<div class="col-xs-3 text-center">
-					<form method="POST" action="/burgers/update?_method=PUT" class="button-size">
-						<input input type="hidden" type="text" name="burger_id" value={{this.id}}><br>
-						<button type="submit" class="btn btn-default">Devour it!</button>
-					</form>
-				</div>
-				{{/unless}}
-			  {{/each}}
-			</div>
-		</div>
-		<div class="col-xs-6 text-center" class="task">
-			  {{#each burger_data}}
-			  	{{#if this.devoured}}
-			  		<input class="form-control" type="text" placeholder="{{this.id}} . {{this.burger_name}}" readonly>
-				{{/if}}
-			  {{/each}}
-		</div>
-	</div>
+<div class="row">
+  <center>
+
+  <div class="col-md-6">
+    <div id="ready_to_eat">
+      <h1>Ready To Eat!</h1>
+      {{#each burgers}}
+      {{#unless devoured}}
+      <form action="burger/eat/{{id}}" method="POST">
+        <div class="input-group">
+          <li class="form-control">{{id}}. {{burger_name}}</li>
+          <span class="input-group-btn">
+            <button class="btn btn-success devour-button" type="submit">Devour It!</button>
+          </span>
+        </div>
+      </form>
+      {{/unless}}
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div id="already_eaten">
+      <h1>Already Eaten!</h1>
+      {{#each burgers}}
+      {{#if this.devoured}}
+      <div class="input-group">
+        <li class="form-control">{{this.id}}. {{this.burger_name}}</li>
+      </div>
+      {{/if}}
+      {{/each}}
+    </div>
+  </div>
+  </center>
 </div>

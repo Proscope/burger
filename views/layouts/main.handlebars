@@ -1,15 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Eat-da-burger</title>
-		<meta charset="UTF-8">
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-		<link rel="stylesheet" href="/assets/css/burger_style.css" type="text/css" />
-	</head>
-	<body>
-		{{{ body }}}
-	</body>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Burger TIME!</title>
+  <link rel="icon" href="/assets/img/burger.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/burger_style.css">
+</head>
+
+<body>
+  <div class="container">
+    <br>
+    <div class = "jumbotron">
+    <div class="row">
+      <img src="/assets/img/burger.png" id="burger">
+    </div>
+    <h1 id="title">Burger TIME!</h1>
+  </div>
+    <hr> {{{body}}}
+    <hr>
+    <form action="burger/create" method="POST">
+      <div class="row">
+        <!-- <div class="col-md-3"></div> -->
+        <div class="form-group col-md-9">
+          <textarea class="form-control" columns="8" rows="1" id="new_burger" placeholder="Enter A New Burger!" name="burger_name"></textarea>
+        </div>
+        <div class="col-md-3"> <button id="submit" type="submit" class="btn btn-danger">Add-A-Burger</button></div>
+      </div>
+
+    </form>
+    <br>
+  </div>
+</body>
+
 </html>

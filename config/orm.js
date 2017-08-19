@@ -1,75 +1,43 @@
+//Requiring connection parameters for Mysql connection//
 var connection = require("./connection.js");
 
-function printQuestionMarks(num) {
-  var arr = [];
-
-  for (var i = 0; i < num; i++) {
-    arr.push("?");
-  }
-
-  return arr.toString();
-}
-
-function objToSql(ob) {
-  // column1=value, column2=value2,...
-  var arr = [];
-
-  for (var key in ob) {
-    arr.push(key + "=" + ob[key]);
-  }
-
-  return arr.toString();
-}
+//Mysql connection//
+connection.connect(function(err) {
+  if (err) {
+    console.error('error: ' + err.stack);
+    return;
+  };
+  console.log('connected as: ' + connection.threadId);
+});
 
 var orm = {
-  all: function(tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  // vals is an array
-  // inserting values into cols
-  create: function(table, cols, vals, cb) {
-    var queryString = "INSERT INTO " + table;
-
-    queryString += " (";
-    queryString += cols.toString();
-    queryString += ") ";
-    queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
-    queryString += ") ";
-
-    console.log(queryString);
-
-    connection.query(queryString, vals, function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  // function to update the objColVals
-  
-  update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
-
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
-
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  }
+  //SELECT ALL====================================================//
+    selectAll: function(cb) {
+      var query = "SELECT * FROM burgers"
+      connection.query(query, function(err, result) {
+        if (err) throw err;
+        cb(result);
+      });
+    },
+    //INSERT ONE====================================================//
+    insertOne: function(burger_name, cb) {
+      var query = "INSERT INTO burgers SET ?"
+      connection.query(query, {
+        burger_name: burger_name,
+        devoured: false
+      }, function(err, result) {
+        if (err) throw err;
+        cb(result);
+      });
+    },
+    //UPDATE ONE====================================================//
+    updateOne: function(burgerID, cb) {
+      var query = "UPDATE burgers SET ? WHERE ?";
+      connection.query(query, [ {devoured: true}, {id: burgerID} ], function(err, result) {
+        if (err) throw err;
+        cb(result);
+      });
+    }
 };
-
+//Export Orm object so it can be used by controller//
 module.exports = orm;
