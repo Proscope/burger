@@ -8,11 +8,20 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
+Take the 2 files in the db folder and run them in your mysql workbench or sequel pro type program.
+
 ### Installing
+
+Just need to run npm install in your terminal where you downloaded the project
 
 ## Deployment
 
+Once npm is finished then run node server.js
+Now open your browser and go to localhost:3000.
+
 ## Built With
+
+Node.JS, Express, Handlebars and MySql
 
 ## Authors
 
